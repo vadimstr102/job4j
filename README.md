@@ -1,2 +1,2 @@
 # job4j
-*внёс изменения*
+*Change README_2*
