@@ -10,11 +10,11 @@ public class MatrixCheck {
             for (int cell = 0; cell < board.length; cell++) {
                 char sign = board[row][cell];
                 resultRow = sign == 'X' ? true : false;
-                if (resultRow == false) {
+                if (!resultRow) {
                     break;
                 }
             }
-            if (resultRow == true) {
+            if (resultRow) {
                 break;
             }
         }
@@ -23,15 +23,15 @@ public class MatrixCheck {
             for (int row = 0; row < board.length; row++) {
                 char sign = board[row][cell];
                 resultCell = sign == 'X' ? true : false;
-                if (resultCell == false) {
+                if (!resultCell) {
                     break;
                 }
             }
-            if (resultCell == true) {
+            if (resultCell) {
                 break;
             }
         }
-        if (resultRow || resultCell == true) {
+        if (resultRow || resultCell) {
             result = true;
         }
         return result;
