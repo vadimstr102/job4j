@@ -6,34 +6,22 @@ public class MatrixCheck {
         boolean resultRow = false;
         boolean resultCell = false;
 
-        for (int row = 0; row < board.length; row++) { //Проверяем ряды
+        for (int row = 0; row < board.length; row++) {
             for (int cell = 0; cell < board.length; cell++) {
-                char sign = board[row][cell];
-                resultRow = sign == 'X' ? true : false;
-                if (!resultRow) {
+                char signR = board[row][cell];
+                char signC = board[cell][row];
+                resultRow = signR == 'X' ? true : false;
+                resultCell = signC == 'X' ? true : false;
+                if (!resultRow && !resultCell) {
                     break;
                 }
             }
-            if (resultRow) {
+            if (resultRow || resultCell) {
+                result = true;
                 break;
             }
         }
 
-        for (int cell = 0; cell < board.length; cell++) { //Проверяем столбцы
-            for (int row = 0; row < board.length; row++) {
-                char sign = board[row][cell];
-                resultCell = sign == 'X' ? true : false;
-                if (!resultCell) {
-                    break;
-                }
-            }
-            if (resultCell) {
-                break;
-            }
-        }
-        if (resultRow || resultCell) {
-            result = true;
-        }
         return result;
     }
 
@@ -61,7 +49,7 @@ public class MatrixCheck {
         char[][] notWin = {
                 {'_', '_', 'X', '_', '_'},
                 {'_', '_', 'X', '_', '_'},
-                {'_', 'X', '_', '_', '_'},
+                {'_', '_', '_', 'X', 'X'},
                 {'_', '_', 'X', '_', '_'},
                 {'_', '_', 'X', '_', '_'},
         };
