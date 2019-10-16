@@ -5,7 +5,6 @@ public class MatrixCheck {
         boolean result = false;
         boolean resultRow = false;
         boolean resultCell = false;
-
         for (int row = 0; row < board.length; row++) {
             for (int cell = 0; cell < board.length; cell++) {
                 char signR = board[row][cell];
@@ -21,7 +20,6 @@ public class MatrixCheck {
                 break;
             }
         }
-
         return result;
     }
 
