@@ -5,28 +5,17 @@ import java.util.Arrays;
 public class Merge {
     public int[] merge(int[] left, int[] right) {
         int[] rsl = new int[left.length + right.length];
-        int iL = 0;
-        int iR = 0;
-        int i = 0;
-        while (i < rsl.length) {
-            if (iL < left.length) {
-                if (iR < right.length) {
-                    if (left[iL] < right[iR]) {
-                        rsl[i] = left[iL];
-                        iL++;
-                    } else {
-                        rsl[i] = right[iR];
-                        iR++;
-                    }
-                } else {
-                    rsl[i] = left[iL];
-                    iL++;
-                }
-            } else if (iR < right.length) {
-                rsl[i] = right[iR];
-                iR++;
+        int leftPoint = 0;
+        int rightPoint = 0;
+        int rslPoint = 0;
+        while (leftPoint + rightPoint != rsl.length) {
+            if (leftPoint != left.length && rightPoint != right.length) {
+                rsl[rslPoint++] = left[leftPoint] < right[rightPoint] ? left[leftPoint++] : right[rightPoint++];
+            } else if (leftPoint != left.length) {
+                rsl[rslPoint++] = left[leftPoint++];
+            } else {
+                rsl[rslPoint++] = right[rightPoint++];
             }
-            i++;
         }
         return rsl;
     }
