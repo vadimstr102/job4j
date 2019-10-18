@@ -20,4 +20,19 @@ public class MaxTest {
         int result = Max.max(2, 2);
         assertThat(result, is(2));
     }
+    @Test
+    public void whenMax123Then() {
+        assertThat(
+                Max.max(1, 2, 3),
+                is(3)
+        );
+    }
+
+    @Test
+    public void whenMax1234Then() {
+        assertThat(
+                Max.max(1, 2, 3, 4),
+                is(4)
+        );
+    }
 }
