@@ -1,14 +1,17 @@
 package ru.job4j.oop;
 
 public class Animal {
-    public Animal() {
+    private String name;
+
+    public Animal(String name) {
         super();
+        this.name = name;
         System.out.println(getClass().getName());
     }
 
     public static void main(String[] args) {
-        Animal animal = new Animal();
-        Predator predator = new Predator();
-        Tiger tiger = new Tiger();
+        Animal animal = new Animal("Barsik");
+        Predator predator = new Predator("Barsik");
+        Tiger tiger = new Tiger("Barsik");
     }
 }
