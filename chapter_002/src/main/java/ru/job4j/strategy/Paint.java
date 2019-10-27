@@ -9,6 +9,5 @@ public class Paint {
         Paint paint = new Paint();
         paint.draw(new Square());
         paint.draw(new Triangle());
-
     }
 }
