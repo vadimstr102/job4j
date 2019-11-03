@@ -4,8 +4,13 @@ public class StubAction implements UserAction {
     private boolean call = false;
 
     @Override
-    public String name() {
-        return "Stub action";
+    public int key() {
+        return 0;
+    }
+
+    @Override
+    public String info() {
+        return this.key() + " : Stub action";
     }
 
     @Override

@@ -16,7 +16,7 @@ public class FindItemsByNameTest {
         Tracker tracker = new Tracker();
         Item item = new Item("fix bug");
         tracker.add(item);
-        FindItemsByName act = new FindItemsByName();
+        FindItemsByName act = new FindItemsByName(5, "Find items by name");
         act.execute(new StubInput(new String[] {item.getName()}), tracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add(item.getId() + " " + item.getName())

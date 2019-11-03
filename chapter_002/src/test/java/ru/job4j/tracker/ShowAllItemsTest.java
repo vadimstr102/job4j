@@ -18,7 +18,7 @@ public class ShowAllItemsTest {
         Tracker tracker = new Tracker();
         Item item = new Item("fix bug");
         tracker.add(item);
-        ShowAllItems act = new ShowAllItems();
+        ShowAllItems act = new ShowAllItems(3, "Show all items");
         act.execute(new StubInput(new String[] {}), tracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add(item.getId() + " " + item.getName())

@@ -1,9 +1,9 @@
 package ru.job4j.tracker;
 
-public class ReplaceItem implements UserAction {
-    @Override
-    public String name() {
-        return "=== Edit item ====";
+public class ReplaceItem extends BaseAction {
+
+    public ReplaceItem(int key, String name) {
+        super(key, name);
     }
 
     @Override
