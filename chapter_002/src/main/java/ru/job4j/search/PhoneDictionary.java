@@ -17,7 +17,7 @@ public class PhoneDictionary {
      */
     public List<Person> find(String key) {
         List<Person> result = new ArrayList<>();
-        for(Person person: this.persons) {
+        for (Person person: this.persons) {
             StringBuilder s = new StringBuilder(
                     person.getName() + person.getSurname() + person.getAddress() + person.getPhone()
             );
