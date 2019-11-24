@@ -1,0 +1,21 @@
+package ru.job4j.sort;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+public class SortUserTest {
+    @Test
+    public void whenSorted() {
+        List<User> users = new ArrayList<>();
+        users.add(new User("Vadim", 30));
+        users.add(new User("Petr", 25));
+        users.add(new User("Ivan", 35));
+        users.add(new User("Alex", 18));
+        Set<User> result = new SortUser().sort(users);
+        Assert.assertEquals(result.toString(), "[Alex: 18, Petr: 25, Vadim: 30, Ivan: 35]");
+    }
+}
