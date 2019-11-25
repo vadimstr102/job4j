@@ -38,7 +38,8 @@ public class PaintTest {
                                 .append("+ + + +\n")
                                 .append("+     +\n")
                                 .append("+     +\n")
-                                .append("+ + + +\r\n")
+                                .append("+ + + +")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -54,7 +55,8 @@ public class PaintTest {
                                 .append("   +   \n")
                                 .append("  + +  \n")
                                 .append(" +   + \n")
-                                .append("+++++++\r\n")
+                                .append("+++++++")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
