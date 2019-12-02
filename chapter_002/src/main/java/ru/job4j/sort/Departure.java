@@ -4,12 +4,11 @@ import java.util.*;
 
 public class Departure {
     public static void abs(List<String> orgs) {
-        Collections.sort(orgs);
+        orgs.sort(Comparator.naturalOrder());
     }
 
     public static List<String> desc(List<String> orgs) {
-        Collections.sort(orgs);
-        Collections.reverse(orgs);
+        orgs.sort(Comparator.reverseOrder());
         List<String> list = new ArrayList<>();
         List<String> temp = new ArrayList<>();
         for (int i = 0; i < orgs.size() - 1; i++) {
