@@ -12,6 +12,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
+
     @Test
     public void whenExit() {
         StubInput input = new StubInput(
@@ -20,7 +21,7 @@ public class StartUITest {
         StubAction action = new StubAction();
         List<UserAction> list = new ArrayList<>();
         list.add(action);
-        new StartUI().init(input, new Tracker(), list);
+        new StartUI(input, new Tracker(), System.out::println).init(list);
         assertThat(action.isCall(), is(true));
     }
 
@@ -35,7 +36,7 @@ public class StartUITest {
         StubAction action = new StubAction();
         List<UserAction> list = new ArrayList<>();
         list.add(action);
-        new StartUI().init(input, new Tracker(), list);
+        new StartUI(input, new Tracker(), System.out::println).init(list);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu.")
                 .add("0 : Stub action")
