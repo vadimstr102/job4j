@@ -47,8 +47,6 @@ public class Bank {
         List<Account> result = new ArrayList<>();
         if (getUser(passport) != null) {
             result = this.bankAccounts.get(getUser(passport));
-            /*result = this.bankAccounts.entrySet().stream().filter(entry -> entry.getKey().equals(user)).map(Map.Entry::getValue)
-                    .collect(Collectors.toList()).stream().flatMap(ArrayList::stream).collect(Collectors.toList());*/
         }
         return result;
     }
