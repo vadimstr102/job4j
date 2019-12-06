@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Bank {
     private Map<User, ArrayList<Account>> bankAccounts = new HashMap<>();
@@ -15,10 +14,10 @@ public class Bank {
 
     public User getUser(String passport) {
         User result = null;
-        for (User user: this.bankAccounts.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                result = user;
-            }
+        try {
+            result = this.bankAccounts.keySet().stream().filter(u -> u.getPassport().equals(passport)).findFirst().get();
+        } catch (Exception e) {
+            System.out.println("User not found");
         }
         return result;
     }
@@ -45,11 +44,11 @@ public class Bank {
     }
 
     public List<Account> getUserAccounts(String passport) {
-        User user = getUser(passport);
         List<Account> result = new ArrayList<>();
-        if (user != null) {
-            result = this.bankAccounts.entrySet().stream().filter(entry -> entry.getKey().equals(user)).map(Map.Entry::getValue)
-                    .collect(Collectors.toList()).stream().flatMap(ArrayList::stream).collect(Collectors.toList());
+        if (getUser(passport) != null) {
+            result = this.bankAccounts.get(getUser(passport));
+            /*result = this.bankAccounts.entrySet().stream().filter(entry -> entry.getKey().equals(user)).map(Map.Entry::getValue)
+                    .collect(Collectors.toList()).stream().flatMap(ArrayList::stream).collect(Collectors.toList());*/
         }
         return result;
     }
