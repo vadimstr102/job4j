@@ -1,11 +1,13 @@
 package ru.job4j.transfers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Bank {
-    private TreeMap<User, ArrayList<Account>> bankAccounts = new TreeMap<>();
+    private Map<User, ArrayList<Account>> bankAccounts = new HashMap<>();
 
     public void addUser(User user) {
         this.bankAccounts.put(user, new ArrayList<>());
@@ -43,9 +45,11 @@ public class Bank {
     }
 
     public List<Account> getUserAccounts(String passport) {
+        User user = getUser(passport);
         List<Account> result = new ArrayList<>();
-        if (getUser(passport) != null) {
-            result = this.bankAccounts.get(getUser(passport));
+        if (user != null) {
+            result = this.bankAccounts.entrySet().stream().filter(entry -> entry.getKey().equals(user)).map(Map.Entry::getValue)
+                    .collect(Collectors.toList()).stream().flatMap(ArrayList::stream).collect(Collectors.toList());
         }
         return result;
     }
