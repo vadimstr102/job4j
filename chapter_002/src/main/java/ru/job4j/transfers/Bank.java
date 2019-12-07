@@ -58,12 +58,4 @@ public class Bank {
                 && this.bankAccounts.get(user2).contains(account2)
                 && getAccount(user1, account1).transfer(getAccount(user2, account2), amount);
     }
-
-    public static void main(String[] args) {
-        Bank bank = new Bank();
-        bank.addUser(new User("Vadim", "123"));
-        bank.addAccountToUser("123", new Account(1000, "456"));
-        User vadim = bank.getUser("456");
-        System.out.println(vadim);
-    }
 }
