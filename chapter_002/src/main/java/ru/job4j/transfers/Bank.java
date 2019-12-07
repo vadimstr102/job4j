@@ -14,10 +14,8 @@ public class Bank {
 
     public User getUser(String passport) {
         User result = null;
-        try {
+        if (this.bankAccounts.keySet().stream().anyMatch(u -> u.getPassport().equals(passport))) {
             result = this.bankAccounts.keySet().stream().filter(u -> u.getPassport().equals(passport)).findFirst().get();
-        } catch (Exception e) {
-            System.out.println("User not found");
         }
         return result;
     }
@@ -59,5 +57,13 @@ public class Bank {
         return this.bankAccounts.get(user1).contains(account1)
                 && this.bankAccounts.get(user2).contains(account2)
                 && getAccount(user1, account1).transfer(getAccount(user2, account2), amount);
+    }
+
+    public static void main(String[] args) {
+        Bank bank = new Bank();
+        bank.addUser(new User("Vadim", "123"));
+        bank.addAccountToUser("123", new Account(1000, "456"));
+        User vadim = bank.getUser("456");
+        System.out.println(vadim);
     }
 }
