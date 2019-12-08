@@ -15,14 +15,14 @@ public class DiapasonTest {
     @Test
     public void whenLinearFunctionThenLinearResults() {
         List<Double> result = function.diapason(5, 8, x -> 2 * x + 1);
-        List<Double> expected = Arrays.asList(11D, 13D, 15D);
+        List<Double> expected = List.of(11D, 13D, 15D);
         assertThat(result, is(expected));
     }
 
     @Test
     public void whenQuadsFunctionThenQuadsResults() {
         List<Double> result = function.diapason(2, 8, x -> x * x);
-        List<Double> expected = Arrays.asList(4D, 9D, 16D, 25D, 36D, 49D);
+        List<Double> expected = List.of(4D, 9D, 16D, 25D, 36D, 49D);
         assertThat(result, is(expected));
     }
 

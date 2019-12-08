@@ -1,37 +1,35 @@
 package ru.job4j.stream;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 
 public class SchoolTest {
     School school = new School();
-    List<Student> studentList = new ArrayList<>();
-    List<Student> studentList2 = new ArrayList<>();
-
-    @Before
-    public void start() {
-        studentList.add(new Student(20));
-        studentList.add(new Student(30));
-        studentList.add(new Student(45));
-        studentList.add(new Student(50));
-        studentList.add(new Student(55));
-        studentList.add(new Student(60));
-        studentList.add(new Student(70));
-        studentList.add(new Student(80));
-        studentList.add(new Student(90));
-        studentList.add(new Student(100));
-
-        studentList2.add(new Student("Timofeev"));
-        studentList2.add(new Student("Ivanov"));
-        studentList2.add(new Student("Arsentev"));
-        studentList2.add(new Student("Petrov"));
-        studentList2.add(new Student("Cobain"));
-    }
+    List<Student> studentList = List.of(
+            new Student(20),
+            new Student(30),
+            new Student(45),
+            new Student(50),
+            new Student(55),
+            new Student(60),
+            new Student(70),
+            new Student(80),
+            new Student(90),
+            new Student(100)
+    );
+    List<Student> studentList2 = List.of(
+            new Student("Timofeev"),
+            new Student("Ivanov"),
+            new Student("Arsentev"),
+            new Student("Petrov"),
+            new Student("Cobain")
+    );
 
     @Test
     public void whenClassA() {
@@ -57,12 +55,13 @@ public class SchoolTest {
     @Test
     public void whenCollectToMap() {
         Map<String, Student> result = school.collectToMap(studentList2);
-        Map<String, Student> expected = new HashMap<>();
-        expected.put("Arsentev", new Student("Arsentev"));
-        expected.put("Cobain", new Student("Cobain"));
-        expected.put("Ivanov", new Student("Ivanov"));
-        expected.put("Petrov", new Student("Petrov"));
-        expected.put("Timofeev", new Student("Timofeev"));
+        Map<String, Student> expected = Map.of(
+                "Arsentev", new Student("Arsentev"),
+                "Cobain", new Student("Cobain"),
+                "Ivanov", new Student("Ivanov"),
+                "Petrov", new Student("Petrov"),
+                "Timofeev", new Student("Timofeev")
+        );
         Assert.assertThat(result, is(expected));
     }
 }

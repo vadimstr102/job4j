@@ -24,13 +24,15 @@ public class ProfilesTest {
 
     @Before
     public void addresses() {
-        profileList.add(new Profile(address1));
-        profileList.add(new Profile(address2));
-        profileList.add(new Profile(address3));
-        profileList.add(new Profile(address4));
-        profileList.add(new Profile(address5));
-        profileList.add(new Profile(address6));
-        profileList.add(new Profile(address7));
+        profileList = List.of(
+                new Profile(address1),
+                new Profile(address2),
+                new Profile(address3),
+                new Profile(address4),
+                new Profile(address5),
+                new Profile(address6),
+                new Profile(address7)
+        );
     }
 
     @Test
