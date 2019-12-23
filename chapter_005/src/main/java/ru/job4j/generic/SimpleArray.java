@@ -16,14 +16,18 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void set(int position, T model) {
-        this.array[position] = model;
+        if (position < index) {
+            this.array[position] = model;
+        }
     }
 
     public void remove(int position) {
-        this.array[position] = null;
-        if (position != this.array.length - 1) {
-            System.arraycopy(this.array, position + 1, this.array, position, this.array.length - position - 1);
-            this.array[this.array.length - 1] = null;
+        if (position < index) {
+            this.array[position] = null;
+            if (position < index - 1) {
+                System.arraycopy(this.array, position + 1, this.array, position, index - position - 1);
+                this.array[index - 1] = null;
+            }
         }
     }
 
@@ -34,15 +38,14 @@ public class SimpleArray<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         Iterator<T> iterator = new Iterator<T>() {
-            private int index = 0;
+            private int itIndex = 0;
 
             @Override
             public boolean hasNext() {
-                boolean result = true;
-                if (index == array.length) {
-                    result = false;
+                while (itIndex < array.length && array[itIndex] == null) {
+                    itIndex++;
                 }
-                return result;
+                return itIndex < array.length && array[itIndex] != null;
             }
 
             @Override
@@ -50,7 +53,7 @@ public class SimpleArray<T> implements Iterable<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (T) array[index++];
+                return (T) array[itIndex++];
             }
         };
         return iterator;
