@@ -4,12 +4,12 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SimpleList<E> implements Iterable<E> {
+public class ArrayListContainer<E> implements Iterable<E> {
     private Object[] container;
     private int index = 0;
     private int modCount = 0;
 
-    public SimpleList() {
+    public ArrayListContainer() {
         this.container = new Object[10];
     }
 
