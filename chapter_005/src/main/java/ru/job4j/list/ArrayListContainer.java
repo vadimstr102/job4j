@@ -15,12 +15,16 @@ public class ArrayListContainer<E> implements Iterable<E> {
 
     public void add(E value) {
         if (this.index == this.container.length) {
-            Object[] newContainer = new Object[this.index * 2];
-            System.arraycopy(this.container, 0, newContainer, 0, this.index);
-            this.container = newContainer;
-            this.modCount++;
+            containerExpansion();
         }
         this.container[index++] = value;
+    }
+
+    private void containerExpansion() {
+        Object[] newContainer = new Object[this.index * 2];
+        System.arraycopy(this.container, 0, newContainer, 0, this.index);
+        this.container = newContainer;
+        this.modCount++;
     }
 
     public E get(int position) {
@@ -33,7 +37,7 @@ public class ArrayListContainer<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        Iterator<E> it = new Iterator<E>() {
+        return new Iterator<>() {
             private int itIndex = 0;
             private int itModCount = modCount;
 
@@ -59,6 +63,5 @@ public class ArrayListContainer<E> implements Iterable<E> {
                 return (E) container[itIndex++];
             }
         };
-        return it;
     }
 }
