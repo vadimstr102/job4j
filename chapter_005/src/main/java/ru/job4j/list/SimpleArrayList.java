@@ -18,7 +18,7 @@ public class SimpleArrayList<E> {
     }
 
     /**
-     * Реализовать метод удаления первого элемент в списке.
+     * Метод удаления первого элемента в списке.
      */
     public E delete() {
         Node<E> result = this.first;
