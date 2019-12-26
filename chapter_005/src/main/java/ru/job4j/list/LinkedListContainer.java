@@ -39,6 +39,16 @@ public class LinkedListContainer<E> implements Iterable<E> {
     }
 
     /**
+     * Метод удаления первого элемента в списке.
+     */
+    public E delete() {
+        Node<E> result = this.first;
+        this.first = result.next;
+        size--;
+        return result.data;
+    }
+
+    /**
      * Класс предназначен для хранения данных.
      */
     private static class Node<E> {
@@ -52,7 +62,7 @@ public class LinkedListContainer<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
+        return new Iterator<>() {
             private int itIndex;
             private int itModCount = modCount;
 
