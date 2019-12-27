@@ -10,4 +10,8 @@ public class SimpleStack<T> {
     public void push(T value) {
         linkedListContainer.add(value);
     }
+
+    public int getSize() {
+        return this.linkedListContainer.getSize();
+    }
 }

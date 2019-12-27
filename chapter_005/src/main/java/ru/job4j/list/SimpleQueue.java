@@ -1,25 +1,19 @@
 package ru.job4j.list;
 
 public class SimpleQueue<T> {
-    private SimpleStack<T> simpleStack1 = new SimpleStack<>();
-    private SimpleStack<T> simpleStack2 = new SimpleStack<>();
-    private int count1 = 0;
-    private int count2 = 0;
-
-    public T poll() {
-        if (count2 == 0) {
-            while (count1 > 0) {
-                this.simpleStack2.push(this.simpleStack1.poll());
-                this.count2++;
-                this.count1--;
-            }
-        }
-        this.count2--;
-        return this.simpleStack2.poll();
-    }
+    private SimpleStack<T> pushStack = new SimpleStack<>();
+    private SimpleStack<T> pollStack = new SimpleStack<>();
 
     public void push(T value) {
-        this.count1++;
-        this.simpleStack1.push(value);
+        this.pushStack.push(value);
+    }
+
+    public T poll() {
+        if (pollStack.getSize() == 0) {
+            while (pushStack.getSize() > 0) {
+                this.pollStack.push(this.pushStack.poll());
+            }
+        }
+        return this.pollStack.poll();
     }
 }

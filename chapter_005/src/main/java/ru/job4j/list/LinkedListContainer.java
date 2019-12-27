@@ -44,7 +44,7 @@ public class LinkedListContainer<E> implements Iterable<E> {
     public E delete() {
         Node<E> result = this.first;
         this.first = result.next;
-        size--;
+        this.size--;
         return result.data;
     }
 
