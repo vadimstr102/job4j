@@ -23,6 +23,9 @@ public class SimpleSetTest {
     public void whenAddElements() {
         assertThat(set.add(4), is(true));
         assertThat(set.add(5), is(true));
+        assertThat(set.add(null), is(true));
+        assertThat(set.add(null), is(false));
+        assertThat(set.add(null), is(false));
         assertThat(set.add(2), is(false));
         assertThat(set.add(3), is(false));
     }

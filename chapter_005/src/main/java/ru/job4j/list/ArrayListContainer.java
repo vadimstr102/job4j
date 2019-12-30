@@ -32,7 +32,7 @@ public class ArrayListContainer<E> implements Iterable<E> {
     }
 
     public int size() {
-        return this.container.length;
+        return this.index;
     }
 
     @Override

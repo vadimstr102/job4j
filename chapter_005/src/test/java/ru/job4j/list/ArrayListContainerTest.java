@@ -31,7 +31,7 @@ public class ArrayListContainerTest {
         assertThat(arrayListContainer.size(), is(10));
         arrayListContainer.add(10);
         arrayListContainer.add(11);
-        assertThat(arrayListContainer.size(), is(20));
+        assertThat(arrayListContainer.size(), is(12));
         assertThat(arrayListContainer.get(11), is(11));
     }
 
