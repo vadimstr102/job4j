@@ -3,6 +3,7 @@ package ru.job4j.set;
 import ru.job4j.list.ArrayListContainer;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable<E> {
     private ArrayListContainer<E> list = new ArrayListContainer<>();
@@ -17,16 +18,10 @@ public class SimpleSet<E> implements Iterable<E> {
 
     private boolean duplicateCheck(E value) {
         boolean result = true;
-        if (value == null) {
-            if (this.list.get(this.list.size() - 1) == null) {
+        for (int i = 0; i < this.list.size(); i++) {
+            if (Objects.equals(this.list.get(i), value)) {
                 result = false;
-            }
-        } else {
-            for (E e : this.list) {
-                if (value.equals(e)) {
-                    result = false;
-                    break;
-                }
+                break;
             }
         }
         return result;
