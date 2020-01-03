@@ -5,35 +5,28 @@ import java.util.*;
 public class Departure {
 
     public static Set<String> abs(Set<String> orgs) {
-        Set<String> result = new TreeSet<>();
-        result.addAll(orgs);
-        return result;
+        return new TreeSet<>(orgs);
     }
 
     public static Set<String> desc(Set<String> orgs) {
-        Set<String> result = new TreeSet<>(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                int res = o1.compareTo(o2);
-                if (res != 0) {
-                    res = -res;
-                    if (o1.indexOf(o2) == 0) {
-                        res = 1;
-                    }
-                    if (o2.indexOf(o1) == 0) {
-                        res = -1;
-                    }
+        Set<String> result = new TreeSet<>((o1, o2) -> {
+            int res = o2.compareTo(o1);
+            if (res != 0) {
+                if (o1.indexOf(o2) == 0) {
+                    res = 1;
                 }
-                return res;
+                if (o2.indexOf(o1) == 0) {
+                    res = -1;
+                }
             }
+            return res;
         });
         result.addAll(orgs);
         return result;
     }
 
     public static Set<String> fillGaps(Set<String> orgs) {
-        Set<String> result = new TreeSet<>();
-        result.addAll(orgs);
+        Set<String> result = new TreeSet<>(orgs);
         for (String s : orgs) {
             for (int j = 0; j < s.length(); j++) {
                 if (s.charAt(j) == '\\') {
