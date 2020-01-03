@@ -18,6 +18,7 @@ public class ArrayListContainer<E> implements Iterable<E> {
             containerExpansion();
         }
         this.container[index++] = value;
+        this.modCount++;
     }
 
     private void containerExpansion() {
@@ -46,10 +47,7 @@ public class ArrayListContainer<E> implements Iterable<E> {
                 if (this.itModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                while (itIndex < container.length && container[itIndex] == null) {
-                    itIndex++;
-                }
-                return itIndex < container.length && container[itIndex] != null;
+                return itIndex < index;
             }
 
             @Override
