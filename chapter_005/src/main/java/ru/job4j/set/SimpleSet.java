@@ -18,8 +18,8 @@ public class SimpleSet<E> implements Iterable<E> {
 
     private boolean duplicateCheck(E value) {
         boolean result = true;
-        for (int i = 0; i < this.list.size(); i++) {
-            if (Objects.equals(this.list.get(i), value)) {
+        for (E e : this.list) {
+            if (Objects.equals(value, e)) {
                 result = false;
                 break;
             }
