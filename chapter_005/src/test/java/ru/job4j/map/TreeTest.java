@@ -42,4 +42,63 @@ public class TreeTest {
         assertThat(tree.add(6, 7), is(true));
         assertThat(tree.add(8, 3), is(true));
     }
+
+    @Test
+    public void whenIsBinaryTrue() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        tree.add(2, 5);
+        tree.add(3, 6);
+        tree.add(3, 7);
+        tree.add(7, 8);
+        tree.add(7, 9);
+        assertThat(tree.isBinary(), is(true));
+    }
+
+    @Test
+    public void whenIsBinaryFalseInRoot() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(2, 5);
+        tree.add(2, 6);
+        tree.add(3, 7);
+        tree.add(3, 8);
+        tree.add(7, 9);
+        tree.add(7, 10);
+        assertThat(tree.isBinary(), is(false));
+    }
+
+    @Test
+    public void whenIsBinaryFalseInChildrenOfRoot() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        tree.add(2, 5);
+        tree.add(2, 6);
+        tree.add(3, 7);
+        tree.add(3, 8);
+        tree.add(7, 9);
+        tree.add(7, 10);
+        assertThat(tree.isBinary(), is(false));
+    }
+
+    @Test
+    public void whenIsBinaryFalseInChildrenOfChildren() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        tree.add(2, 5);
+        tree.add(3, 6);
+        tree.add(3, 7);
+        tree.add(7, 8);
+        tree.add(7, 9);
+        tree.add(7, 10);
+        assertThat(tree.isBinary(), is(false));
+    }
 }
