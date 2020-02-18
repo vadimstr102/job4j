@@ -37,6 +37,8 @@ public class SimpleMapTest {
         simpleMap.insert(5, "six");
         assertThat(simpleMap.size(), is(5));
         assertThat(simpleMap.get(5), is("six"));
+        simpleMap.insert(5, "six");
+        assertThat(simpleMap.size(), is(5));
     }
 
     @Test

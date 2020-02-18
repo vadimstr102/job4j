@@ -44,11 +44,11 @@ public class SimpleMap<K, V> implements Iterable {
         }
         List<Node<K, V>> nodeList = this.table[index].nodes;
         for (Node<K, V> node : nodeList) {
-            if (keyExistButValueNew(node, newNode) || collisionProcessing(node, newNode, nodeList)) {
+            if (keyExistButValueNew(node, newNode)) {
                 return true;
             }
         }
-        return false;
+        return collisionProcessing(newNode, nodeList);
     }
 
     private boolean simpleAdd(Node<K, V> node, int index) {
@@ -61,23 +61,18 @@ public class SimpleMap<K, V> implements Iterable {
 
     private boolean keyExistButValueNew(final Node<K, V> nodeFromList, final Node<K, V> newNode) {
         if (nodeFromList.key.hashCode() == newNode.key.hashCode()
-                && Objects.equals(nodeFromList.key, newNode.key)
-                && !Objects.equals(nodeFromList.value, newNode.value)) {
+                && Objects.equals(nodeFromList.key, newNode.key)) {
             nodeFromList.value = newNode.value;
             return true;
         }
         return false;
     }
 
-    private boolean collisionProcessing(final Node<K, V> nodeFromList, final Node<K, V> newNode, final List<Node<K, V>> nodeList) {
-        if (nodeFromList.key.hashCode() == newNode.key.hashCode()
-                && !Objects.equals(nodeFromList.key, newNode.key)) {
-            nodeList.add(newNode);
-            this.size++;
-            this.modCount++;
-            return true;
-        }
-        return false;
+    private boolean collisionProcessing(final Node<K, V> newNode, final List<Node<K, V>> nodeList) {
+        nodeList.add(newNode);
+        this.size++;
+        this.modCount++;
+        return true;
     }
 
     private void arrayDoubling() {
