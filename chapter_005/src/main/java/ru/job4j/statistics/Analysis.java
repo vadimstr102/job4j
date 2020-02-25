@@ -1,13 +1,17 @@
 package ru.job4j.statistics;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Analysis {
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
-        for (User user : current) {
-            if (previous.contains(user)) {
+        Set<User> previousSet = new HashSet<>(previous);
+        Set<User> currentSet = new HashSet<>(current);
+        for (User user : currentSet) {
+            if (previousSet.contains(user)) {
                 String userName = previous.get(previous.indexOf(user)).name;
                 if (!user.name.equals(userName)) {
                     info.changed++;
@@ -16,8 +20,8 @@ public class Analysis {
                 info.added++;
             }
         }
-        for (User user : previous) {
-            if (!current.contains(user)) {
+        for (User user : previousSet) {
+            if (!currentSet.contains(user)) {
                 info.deleted++;
             }
         }
