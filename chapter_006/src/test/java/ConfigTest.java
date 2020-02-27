@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 public class ConfigTest {
     @Test
     public void whenPairWithoutComment() {
-        String path = "./data/pair_without_comment.properties";
+        String path = "./src/test/resources/pair_without_comment.properties";
         Config config = new Config(path);
         config.load();
         assertThat(
@@ -17,7 +17,7 @@ public class ConfigTest {
 
     @Test
     public void whenUseAppPropertiesWithValidKeys() {
-        Config config = new Config("../app.properties");
+        Config config = new Config("./src/test/resources/app.properties");
         config.load();
         assertThat(
                 config.value("hibernate.dialect"),
@@ -36,7 +36,7 @@ public class ConfigTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void whenUseAppPropertiesWithNotValidKey() {
-        Config config = new Config("../app.properties");
+        Config config = new Config("./src/test/resources/app.properties");
         config.load();
         config.value("## PostgreSQL");
     }
