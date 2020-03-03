@@ -10,21 +10,17 @@ public class Analysis {
         Info info = new Info();
         Set<User> previousSet = new HashSet<>(previous);
         Set<User> currentSet = new HashSet<>(current);
-        for (User user : currentSet) {
-            if (previousSet.contains(user)) {
-                String userName = previous.get(previous.indexOf(user)).name;
-                if (!user.name.equals(userName)) {
+        for (User user : previousSet) {
+            if (currentSet.contains(user)) {
+                String currentUserName = current.get(current.indexOf(user)).name;
+                if (!user.name.equals(currentUserName)) {
                     info.changed++;
                 }
             } else {
-                info.added++;
-            }
-        }
-        for (User user : previousSet) {
-            if (!currentSet.contains(user)) {
                 info.deleted++;
             }
         }
+        info.added = current.size() - (previous.size() - info.deleted);
         return info;
     }
 
