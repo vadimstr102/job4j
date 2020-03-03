@@ -1,3 +1,5 @@
+package ru.job4j.io;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -15,9 +17,8 @@ public class Config {
     public void load() {
         String pair;
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            while (read.ready()) {
-                pair = read.readLine();
-                if (pair.contains("##") || pair.equals("")) {
+            while ((pair = read.readLine()) != null) {
+                if (pair.contains("#") || pair.equals("")) {
                     continue;
                 }
                 String key = pair.split("=")[0];
@@ -32,9 +33,8 @@ public class Config {
     public String value(String key) {
         if (this.values.containsKey(key)) {
             return this.values.get(key);
-        } else {
-            throw new UnsupportedOperationException("This key is not valid!");
         }
+        throw new UnsupportedOperationException("This key is not valid!");
     }
 
     @Override
