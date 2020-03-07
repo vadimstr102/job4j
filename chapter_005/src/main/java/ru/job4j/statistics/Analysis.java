@@ -1,19 +1,20 @@
 package ru.job4j.statistics;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class Analysis {
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
-        Set<User> previousSet = new HashSet<>(previous);
-        Set<User> currentSet = new HashSet<>(current);
-        for (User user : previousSet) {
-            if (currentSet.contains(user)) {
-                String currentUserName = current.get(current.indexOf(user)).name;
-                if (!user.name.equals(currentUserName)) {
+        Map<Integer, User> currentMap = new HashMap<>();
+        for (User user : current) {
+            currentMap.put(user.id, user);
+        }
+        for (User user : previous) {
+            if (currentMap.containsKey(user.id)) {
+                if (!currentMap.get(user.id).equals(user)) {
                     info.changed++;
                 }
             } else {
@@ -42,12 +43,12 @@ public class Analysis {
                 return false;
             }
             User user = (User) o;
-            return id == user.id;
+            return id == user.id && Objects.equals(name, user.name);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id);
+            return Objects.hash(id, name);
         }
     }
 
