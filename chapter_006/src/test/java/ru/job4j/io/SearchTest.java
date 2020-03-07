@@ -63,8 +63,8 @@ public class SearchTest {
 
     @Test
     public void whenUseSearchWithTxt() {
-        List<String> extensions = List.of("txt");
-        List<File> result = Search.files(parent.getAbsolutePath(), extensions);
+        List<File> result = Search.files(parent.getAbsolutePath(),
+                file -> file.getName().split("\\.")[1].equals("txt"));
         List<File> expected = List.of(
                 parentFile1,
                 child1File1,
@@ -79,8 +79,8 @@ public class SearchTest {
 
     @Test
     public void whenUseSearchWithDoc() {
-        List<String> extensions = List.of("doc");
-        List<File> result = Search.files(parent.getAbsolutePath(), extensions);
+        List<File> result = Search.files(parent.getAbsolutePath(),
+                file -> file.getName().split("\\.")[1].equals("doc"));
         List<File> expected = List.of(
                 parentFile3,
                 child2File1,
@@ -95,8 +95,9 @@ public class SearchTest {
 
     @Test
     public void whenUseSearchWithDocAndExe() {
-        List<String> extensions = List.of("doc", "exe");
-        List<File> result = Search.files(parent.getAbsolutePath(), extensions);
+        List<File> result = Search.files(parent.getAbsolutePath(),
+                file -> file.getName().split("\\.")[1].equals("doc")
+                        || file.getName().split("\\.")[1].equals("exe"));
         List<File> expected = List.of(
                 parentFile2,
                 parentFile3,
