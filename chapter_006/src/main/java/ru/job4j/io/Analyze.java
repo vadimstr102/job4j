@@ -33,8 +33,8 @@ public class Analyze {
     }
 
     private void writeToFile(String target, StringBuilder stringBuilder) throws FileNotFoundException {
-        PrintWriter out = new PrintWriter(new FileOutputStream(target));
-        out.print(stringBuilder);
-        out.close();
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
+            out.print(stringBuilder);
+        }
     }
 }
