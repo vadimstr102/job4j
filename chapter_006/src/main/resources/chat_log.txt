@@ -1,7 +1,7 @@
 привет
-I'm fine, thank's.
+My name is Java Machine.
 как дела
-You are look great!
+Nice to meet you.
 стоп
 1
 2
@@ -11,5 +11,5 @@ I'm fine, thank's.
 хорошо
 You are look great!
 спасибо
-Ok)
+I'm fine, thank's.
 закончить
