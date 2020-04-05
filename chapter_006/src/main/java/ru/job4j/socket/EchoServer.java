@@ -29,7 +29,7 @@ public class EchoServer {
                         System.out.println(str);
                         str = in.readLine();
                     }
-                    out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
+                    out.write(("HTTP/1.1 200 OK" + System.lineSeparator() + System.lineSeparator()).getBytes());
                     out.write((answer + System.lineSeparator()).getBytes());
                 }
             }
