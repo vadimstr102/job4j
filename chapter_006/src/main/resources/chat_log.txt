@@ -1,15 +1,15 @@
 привет
-My name is Java Machine.
+Hello!
 как дела
-Nice to meet you.
-стоп
+My name is Java Machine.
+СТОП
 1
 2
 3
 продолжить
-I'm fine, thank's.
-хорошо
 You are look great!
 спасибо
-I'm fine, thank's.
-закончить
+Nice to meet you.
+пока
+Ok)
+Закончить
