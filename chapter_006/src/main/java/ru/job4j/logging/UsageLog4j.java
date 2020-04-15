@@ -15,7 +15,8 @@ public class UsageLog4j {
         double d = 98976967876.5635635;
         boolean bool = true;
         char c = 'j';
-        LOG.debug("Java has eight primitive types:\r\nbyte - {}\r\nshort - {}\r\nint - {}\r\nlong - {}\r\nfloat - {}\r\ndouble - {}\r\nboolean - {}\r\nchar - {}",
-                b, s, i, l, f, d, bool, c);
+        String ls = System.lineSeparator();
+        LOG.debug("Java has eight primitive types:{}byte - {}{}short - {}{}int - {}{}long - {}{}float - {}{}double - {}{}boolean - {}{}char - {}",
+                ls, b, ls, s, ls, i, ls, l, ls, f, ls, d, ls, bool, ls, c);
     }
 }
