@@ -21,7 +21,7 @@ public class StartUITest {
         StubAction action = new StubAction();
         List<UserAction> list = new ArrayList<>();
         list.add(action);
-        new StartUI(input, new Tracker(), System.out::println).init(list);
+        new StartUI(input, new MemTracker(), System.out::println).init(list);
         assertThat(action.isCall(), is(true));
     }
 
@@ -36,7 +36,7 @@ public class StartUITest {
         StubAction action = new StubAction();
         List<UserAction> list = new ArrayList<>();
         list.add(action);
-        new StartUI(input, new Tracker(), System.out::println).init(list);
+        new StartUI(input, new MemTracker(), System.out::println).init(list);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu.")
                 .add("0 : Stub action")

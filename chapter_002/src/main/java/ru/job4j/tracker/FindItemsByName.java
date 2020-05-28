@@ -9,9 +9,9 @@ public class FindItemsByName extends BaseAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store store) {
         String name = input.askStr("Enter searched item name: ");
-        List<Item> items = tracker.findByName(name);
+        List<Item> items = store.findByName(name);
         if (items.size() != 0) {
             for (Item item: items) {
                 System.out.println(item.getId() + " " + item.getName());

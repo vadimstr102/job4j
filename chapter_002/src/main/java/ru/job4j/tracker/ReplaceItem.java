@@ -7,12 +7,12 @@ public class ReplaceItem extends BaseAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store store) {
         String id = input.askStr("Enter edited item id: ");
         String name = input.askStr("Enter new item name: ");
         Item item = new Item(name);
         item.setId(id);
-        boolean result = tracker.replace(id, item);
+        boolean result = store.replace(id, item);
         if (result) {
             System.out.println("Item edited");
         } else {

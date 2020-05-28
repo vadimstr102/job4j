@@ -7,8 +7,13 @@ public class ExitTracker extends BaseAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store store) {
         System.out.println("Exit...");
+        try {
+            store.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }

@@ -13,11 +13,11 @@ public class FindItemsByNameTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PrintStream def = System.out;
         System.setOut(new PrintStream(out));
-        Tracker tracker = new Tracker();
+        MemTracker memTracker = new MemTracker();
         Item item = new Item("fix bug");
-        tracker.add(item);
+        memTracker.add(item);
         FindItemsByName act = new FindItemsByName(5, "Find items by name");
-        act.execute(new StubInput(new String[] {item.getName()}), tracker);
+        act.execute(new StubInput(new String[] {item.getName()}), memTracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add(item.getId() + " " + item.getName())
                 .toString();
