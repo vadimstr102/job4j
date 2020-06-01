@@ -35,9 +35,16 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        try (PreparedStatement st = cn.prepareStatement("insert into items (name) values (?)")) {
+        try (PreparedStatement st = cn.prepareStatement("insert into items (name) values (?)", Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, item.getName());
             st.executeUpdate();
+            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    item.setId(String.valueOf(generatedKeys.getInt(1)));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,36 +53,41 @@ public class SqlTracker implements Store {
 
     @Override
     public boolean replace(String id, Item item) {
+        boolean result = false;
         try (PreparedStatement st = cn.prepareStatement("update items set name=? where id=?")) {
             st.setString(1, item.getName());
             st.setInt(2, Integer.parseInt(id));
-            st.executeUpdate();
+            result = st.executeUpdate() != 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return result;
     }
 
     @Override
     public boolean delete(String id) {
+        boolean result = false;
         try (PreparedStatement st = cn.prepareStatement("delete from items where id=?")) {
             st.setInt(1, Integer.parseInt(id));
-            st.executeUpdate();
+            result = st.executeUpdate() != 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return result;
     }
 
     @Override
     public List<Item> findAll() {
         List<Item> list = new ArrayList<>();
         try (PreparedStatement st = cn.prepareStatement("select * from items")) {
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Item item = new Item(rs.getString("name"));
-                item.setId(String.valueOf(rs.getInt("id")));
-                list.add(item);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    Item item = new Item(rs.getString("name"));
+                    item.setId(String.valueOf(rs.getInt("id")));
+                    list.add(item);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,11 +100,14 @@ public class SqlTracker implements Store {
         List<Item> list = new ArrayList<>();
         try (PreparedStatement st = cn.prepareStatement("select * from items where name=?")) {
             st.setString(1, key);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Item item = new Item(rs.getString("name"));
-                item.setId(String.valueOf(rs.getInt("id")));
-                list.add(item);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    Item item = new Item(rs.getString("name"));
+                    item.setId(String.valueOf(rs.getInt("id")));
+                    list.add(item);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,10 +120,13 @@ public class SqlTracker implements Store {
         Item item = null;
         try (PreparedStatement st = cn.prepareStatement("select * from items where id=?")) {
             st.setInt(1, Integer.parseInt(id));
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                item = new Item(rs.getString("name"));
-                item.setId(String.valueOf(rs.getInt("id")));
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    item = new Item(rs.getString("name"));
+                    item.setId(String.valueOf(rs.getInt("id")));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
