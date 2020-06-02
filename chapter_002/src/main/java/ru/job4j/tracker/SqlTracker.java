@@ -10,6 +10,11 @@ import java.util.Properties;
 public class SqlTracker implements Store {
     private Connection cn;
 
+    public void initConnectionRollback() throws SQLException {
+        this.init();
+        cn = ConnectionRollback.create(cn);
+    }
+
     @Override
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
@@ -40,7 +45,7 @@ public class SqlTracker implements Store {
             st.executeUpdate();
             try (ResultSet generatedKeys = st.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    item.setId(String.valueOf(generatedKeys.getInt(1)));
+                    item.setId(generatedKeys.getString(1));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
