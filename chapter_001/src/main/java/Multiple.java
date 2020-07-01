@@ -1,17 +1,16 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class Multiple {
     public static void main(String[] args) {
-        for (int i = 1; i <= 10; i++) {
-            System.out.println("1 * " + i + " = " + 1 * i);
+        try (FileOutputStream out = new FileOutputStream("result.txt")) {
+            String s;
+            for (int i = 1; i <= 10; i++) {
+                s = "1 * " + i + " = " + i + "\r\n";
+                out.write(s.getBytes());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        /*System.out.println("1 * 1 = 1");
-        System.out.println("1 * 2 = 2");
-        System.out.println("1 * 3 = 3");
-        System.out.println("1 * 4 = 4");
-        System.out.println("1 * 5 = 5");
-        System.out.println("1 * 6 = 6");
-        System.out.println("1 * 7 = 7");
-        System.out.println("1 * 8 = 8");
-        System.out.println("1 * 9 = 9");
-        System.out.println("1 * 10 = 10");*/
     }
 }
