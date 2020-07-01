@@ -18,8 +18,14 @@ public class SearchNewVersion {
     }
 
     public static void main(String[] args) throws IOException {
-        Path root = Paths.get("chapter_006");
-        List<String> list = SearchNewVersion.search(root, "java");
+        if (args.length < 2) {
+            throw new IllegalArgumentException(
+                    "Root folder and/or file extension is null. "
+                            + "Usage java -jar searchnewversion.jar ROOT_FOLDER FILE_EXTENSION."
+            );
+        }
+        Path root = Paths.get(args[0]);
+        List<String> list = SearchNewVersion.search(root, args[1]);
         for (String str : list) {
             System.out.println(str);
         }
