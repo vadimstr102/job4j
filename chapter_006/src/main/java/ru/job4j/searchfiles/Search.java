@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class Search {
-    public Map<String, String> getArgumentsMap(String[] args) {
+    private Map<String, String> getArgumentsMap(String[] args) {
         Map<String, String> map = new HashMap<>();
         map.put(args[0], args[1]);
         map.put(args[2], args[3]);
@@ -18,20 +18,23 @@ public class Search {
         return map;
     }
 
-    public Predicate<Path> getPredicate(String searchFile, String searchArg) {
+    private Predicate<Path> getPredicate(String searchFile, String searchArg) {
+        Pattern pattern;
         switch (searchArg) {
             case "-m":
-                return path -> Pattern.compile(preparePattern(searchFile)).matcher(path.getFileName().toString()).matches();
+                pattern = Pattern.compile(preparePattern(searchFile));
+                return path -> pattern.matcher(path.getFileName().toString()).matches();
             case "-f":
                 return path -> path.getFileName().toString().equals(searchFile);
             case "-r":
-                return path -> Pattern.compile(searchFile).matcher(path.getFileName().toString()).matches();
+                pattern = Pattern.compile(searchFile);
+                return path -> pattern.matcher(path.getFileName().toString()).matches();
             default:
                 return path -> true;
         }
     }
 
-    public String preparePattern(String pattern) {
+    private String preparePattern(String pattern) {
         StringBuilder sb = new StringBuilder();
         for (char c : pattern.toCharArray()) {
             if (c == '*') {
@@ -55,8 +58,10 @@ public class Search {
         String searchArg = args[4];
         String logFilePath = map.get("-o");
 
+        System.out.println("Files search started...");
         SearchFiles searchFiles = new SearchFiles(search.getPredicate(searchFile, searchArg));
         Files.walkFileTree(rootFolder, searchFiles);
         LogWriter.write(searchFiles.getFiles(), logFilePath);
+        System.out.printf("Files search completed. See the result in the log: %s", logFilePath);
     }
 }
