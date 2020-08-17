@@ -1,5 +1,6 @@
 package ru.job4j.exam;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -29,6 +30,17 @@ public class ArticleTest {
     }
 
     @Test
+    public void whenLineGnrHaveMoreWordThenFalse() {
+        assertThat(
+                Article.generateBy(
+                        "Мама мыла раму и окно",
+                        "Мама мыла раму и раму"
+                ),
+                CoreMatchers.is(false)
+        );
+    }
+
+    @Test
     public void whenLongTextTrue() {
         assertThat(
                 Article.generateBy(
@@ -51,6 +63,7 @@ public class ArticleTest {
                 is(true)
         );
     }
+
     @Test
     public void whenLongTextFalse() {
         assertThat(
