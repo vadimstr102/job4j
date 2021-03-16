@@ -4,45 +4,51 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-public class TextFromFileCache extends AbstractCache<StringBuilder> {
-    private SoftReference<StringBuilder> softReference;
-    private String fileName;
+public class TextFromFileCache extends AbstractCache<String> {
+    private final Map<String, SoftReference<String>> cache = new HashMap<>();
 
     @Override
-    public StringBuilder get(String fileName) {
-        if (fileName.equals(this.fileName)) {
-            StringBuilder sb = this.softReference.get();
-            if (sb != null) {
-                return sb;
+    public String get(String fileName) {
+        if (cache.containsKey(fileName)) {
+            String result = cache.get(fileName).get();
+            if (result != null) {
+                return result;
             }
         }
-        this.fileName = fileName;
-        this.softReference = new SoftReference<>(load(fileName));
-        return this.softReference.get();
+        load(fileName);
+        return cache.get(fileName).get();
     }
 
-    private StringBuilder load(String fileName) {
+    private void load(String fileName) {
         StringBuilder sb = new StringBuilder();
-        try (BufferedReader bf = new BufferedReader(new FileReader(fileName))) {
-            bf.lines().forEach(line -> {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            br.lines().forEach(line -> {
                 sb.append(line);
                 sb.append("\r\n");
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return sb;
+        cache.put(fileName, new SoftReference<>(sb.toString()));
     }
 
     public static void main(String[] args) {
         TextFromFileCache textCache = new TextFromFileCache();
-        String fileName = Objects.requireNonNull(TextFromFileCache.class
+        String fileName1 = Objects.requireNonNull(TextFromFileCache.class
+                .getClassLoader()
+                .getResource("profiling.txt"))
+                .getPath();
+        String fileName2 = Objects.requireNonNull(TextFromFileCache.class
                 .getClassLoader()
                 .getResource("names.txt"))
                 .getPath();
-        StringBuilder sb = textCache.get(fileName);
-        System.out.println(sb);
+        System.out.println(textCache.get(fileName1));
+        System.out.println(textCache.get(fileName2));
+        System.out.println(textCache.get(fileName1));
+        System.out.println(textCache.get(fileName2));
     }
 }
