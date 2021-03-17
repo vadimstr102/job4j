@@ -28,7 +28,7 @@ public class TextFromFileCache extends AbstractCache<String> {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             br.lines().forEach(line -> {
                 sb.append(line);
-                sb.append("\r\n");
+                sb.append(System.lineSeparator());
             });
         } catch (IOException e) {
             e.printStackTrace();
