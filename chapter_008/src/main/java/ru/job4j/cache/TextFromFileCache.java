@@ -19,11 +19,11 @@ public class TextFromFileCache extends AbstractCache<String> {
                 return result;
             }
         }
-        load(fileName);
-        return cache.get(fileName).get();
+        return load(fileName);
     }
 
-    private void load(String fileName) {
+    private String load(String fileName) {
+        String result;
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             br.lines().forEach(line -> {
@@ -33,7 +33,9 @@ public class TextFromFileCache extends AbstractCache<String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        cache.put(fileName, new SoftReference<>(sb.toString()));
+        result = sb.toString();
+        cache.put(fileName, new SoftReference<>(result));
+        return result;
     }
 
     public static void main(String[] args) {
