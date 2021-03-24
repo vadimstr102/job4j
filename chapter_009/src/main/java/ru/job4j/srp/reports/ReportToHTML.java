@@ -2,11 +2,11 @@ package ru.job4j.srp.reports;
 
 import java.util.function.Predicate;
 
-public class ReportToDevelopers implements Report {
+public class ReportToHTML implements Report {
 
     private Store store;
 
-    public ReportToDevelopers(Store store) {
+    public ReportToHTML(Store store) {
         this.store = store;
     }
 
@@ -29,10 +29,10 @@ public class ReportToDevelopers implements Report {
                         .append(employee.getName()).append(";")
                     .append("</p>")
                     .append("<p>")
-                        .append(employee.getHired()).append(";")
+                        .append(employee.getHired().getTime()).append(";")
                     .append("</p>")
                     .append("<p>")
-                        .append(employee.getFired()).append(";")
+                        .append(employee.getFired().getTime()).append(";")
                     .append("</p>")
                     .append("<p>")
                         .append(employee.getSalary()).append(";")

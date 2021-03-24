@@ -18,8 +18,8 @@ public class SimpleReport implements Report {
         for (Employee employee : store.findBy(filter)) {
             text
                     .append(employee.getName()).append(";")
-                    .append(employee.getHired()).append(";")
-                    .append(employee.getFired()).append(";")
+                    .append(employee.getHired().getTime()).append(";")
+                    .append(employee.getFired().getTime()).append(";")
                     .append(employee.getSalary()).append(";")
                     .append(System.lineSeparator());
         }
