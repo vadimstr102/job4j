@@ -3,17 +3,19 @@ package ru.job4j.lsp.storage;
 import java.util.Calendar;
 
 public abstract class Food {
-    private String name;
-    private Calendar createDate;
-    private Calendar expiryDate;
+
+    private final String name;
+    private final Calendar createDate;
+    private final Calendar expiryDate;
     private double price;
     private double discount;
 
-    public Food(String name, Calendar createDate, Calendar expiryDate, double price) {
+    public Food(String name, Calendar createDate, Calendar expiryDate, double price, double discount) {
         this.name = name;
         this.createDate = createDate;
         this.expiryDate = expiryDate;
         this.price = price;
+        this.discount = discount;
     }
 
     public String getName() {
@@ -44,5 +46,9 @@ public abstract class Food {
         this.discount = discount;
     }
 
-
+    protected int getQuality() {
+        long lifeTime = System.currentTimeMillis() - getCreateDate().getTimeInMillis();
+        long totalLifeTime = getExpiryDate().getTimeInMillis() - getCreateDate().getTimeInMillis();
+        return (int) (lifeTime * 100 / totalLifeTime);
+    }
 }

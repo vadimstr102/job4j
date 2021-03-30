@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class Milk extends Food {
 
-    public Milk(String name, Calendar expiryDate, Calendar createDate, double price) {
-        super(name, expiryDate, createDate, price);
+    public Milk(String name, Calendar createDate, Calendar expiryDate, double price, double discount) {
+        super(name, createDate, expiryDate, price, discount);
     }
 }

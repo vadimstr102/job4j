@@ -8,71 +8,83 @@ import java.util.*;
 
 import static org.hamcrest.Matchers.is;
 
-
 public class ControlQualityTest {
+
     GregorianCalendar currentDate;
-    GregorianCalendar monthAgo;
-    GregorianCalendar monthLater;
+    GregorianCalendar oneMonthAgo;
+    GregorianCalendar fourMonthsAgo;
+    GregorianCalendar oneMonthLater;
     Bread bread;
     Meat meat;
     Milk milk;
-    Map<String, Storage> map;
+    List<Store> list;
 
     @Before
     public void init() {
         currentDate = new GregorianCalendar();
 
-        monthAgo = new GregorianCalendar();
-        monthAgo.add(Calendar.MONTH, -1);
+        oneMonthAgo = new GregorianCalendar();
+        oneMonthAgo.add(Calendar.MONTH, -1);
 
-        monthLater = new GregorianCalendar();
-        monthLater.add(Calendar.MONTH, 1);
+        fourMonthsAgo = new GregorianCalendar();
+        fourMonthsAgo.add(Calendar.MONTH, -4);
 
-        map = new HashMap<>();
-        map.put("Shop", new Shop(new ArrayList<>()));
-        map.put("Warehouse", new Warehouse(new ArrayList<>()));
-        map.put("Trash", new Trash(new ArrayList<>()));
+        oneMonthLater = new GregorianCalendar();
+        oneMonthLater.add(Calendar.MONTH, 1);
+
+        list = new ArrayList<>();
+        list.add(new Warehouse(new ArrayList<>()));
+        list.add(new Shop(new ArrayList<>()));
+        list.add(new Trash(new ArrayList<>()));
     }
 
     @Test
     public void whenLoadInShop() {
-        bread = new Bread("Bread", monthAgo, monthLater, 100);
-        meat = new Meat("Meat", monthAgo, monthLater, 200);
-        milk = new Milk("Milk", monthAgo, monthLater, 300);
-        ControlQuality controlQuality = new ControlQuality(map);
+        bread = new Bread("Bread", oneMonthAgo, oneMonthLater, 100, 50);
+        meat = new Meat("Meat", oneMonthAgo, oneMonthLater, 200, 50);
+        milk = new Milk("Milk", oneMonthAgo, oneMonthLater, 300, 50);
+        ControlQuality controlQuality = new ControlQuality(list);
         controlQuality.loadFood(bread);
         controlQuality.loadFood(meat);
         controlQuality.loadFood(milk);
-        Assert.assertThat(map.get("Shop").getList().size(), is(3));
-        Assert.assertThat(map.get("Warehouse").getList().size(), is(0));
-        Assert.assertThat(map.get("Trash").getList().size(), is(0));
+        Assert.assertThat(list.get(0).getList().size(), is(0));
+        Assert.assertThat(list.get(1).getList().size(), is(3));
+        Assert.assertThat(list.get(2).getList().size(), is(0));
     }
 
     @Test
     public void whenLoadInWarehouse() {
-        bread = new Bread("Bread", currentDate, monthLater, 100);
-        meat = new Meat("Meat", currentDate, monthLater, 200);
-        milk = new Milk("Milk", currentDate, monthLater, 300);
-        ControlQuality controlQuality = new ControlQuality(map);
+        bread = new Bread("Bread", currentDate, oneMonthLater, 100, 50);
+        meat = new Meat("Meat", currentDate, oneMonthLater, 200, 50);
+        milk = new Milk("Milk", currentDate, oneMonthLater, 300, 50);
+        ControlQuality controlQuality = new ControlQuality(list);
         controlQuality.loadFood(bread);
         controlQuality.loadFood(meat);
         controlQuality.loadFood(milk);
-        Assert.assertThat(map.get("Shop").getList().size(), is(0));
-        Assert.assertThat(map.get("Warehouse").getList().size(), is(3));
-        Assert.assertThat(map.get("Trash").getList().size(), is(0));
+        Assert.assertThat(list.get(0).getList().size(), is(3));
+        Assert.assertThat(list.get(1).getList().size(), is(0));
+        Assert.assertThat(list.get(2).getList().size(), is(0));
     }
 
     @Test
     public void whenLoadInTrash() {
-        bread = new Bread("Bread", monthAgo, currentDate, 100);
-        meat = new Meat("Meat", monthAgo, currentDate, 200);
-        milk = new Milk("Milk", monthAgo, currentDate, 300);
-        ControlQuality controlQuality = new ControlQuality(map);
+        bread = new Bread("Bread", oneMonthAgo, currentDate, 100, 50);
+        meat = new Meat("Meat", oneMonthAgo, currentDate, 200, 50);
+        milk = new Milk("Milk", oneMonthAgo, currentDate, 300, 50);
+        ControlQuality controlQuality = new ControlQuality(list);
         controlQuality.loadFood(bread);
         controlQuality.loadFood(meat);
         controlQuality.loadFood(milk);
-        Assert.assertThat(map.get("Shop").getList().size(), is(0));
-        Assert.assertThat(map.get("Warehouse").getList().size(), is(0));
-        Assert.assertThat(map.get("Trash").getList().size(), is(3));
+        Assert.assertThat(list.get(0).getList().size(), is(0));
+        Assert.assertThat(list.get(1).getList().size(), is(0));
+        Assert.assertThat(list.get(2).getList().size(), is(3));
+    }
+
+    @Test
+    public void whenMakeDiscount() {
+        bread = new Bread("Bread", fourMonthsAgo, oneMonthLater, 100, 20);
+        ControlQuality controlQuality = new ControlQuality(list);
+        controlQuality.loadFood(bread);
+        Assert.assertThat(list.get(1).getList().get(0).getPrice(), is(80.0));
     }
 }
