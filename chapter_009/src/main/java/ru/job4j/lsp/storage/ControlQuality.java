@@ -3,7 +3,6 @@ package ru.job4j.lsp.storage;
 import java.util.List;
 
 public class ControlQuality {
-
     private final List<Store> list;
 
     public ControlQuality(List<Store> list) {

@@ -3,7 +3,6 @@ package ru.job4j.lsp.storage;
 import java.util.Calendar;
 
 public abstract class Food {
-
     private final String name;
     private final Calendar createDate;
     private final Calendar expiryDate;

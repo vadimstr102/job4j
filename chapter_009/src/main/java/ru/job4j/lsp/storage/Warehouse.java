@@ -3,7 +3,6 @@ package ru.job4j.lsp.storage;
 import java.util.List;
 
 public class Warehouse implements Store {
-
     private final List<Food> list;
 
     public Warehouse(List<Food> list) {
