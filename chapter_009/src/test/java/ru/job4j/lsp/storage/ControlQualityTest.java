@@ -9,7 +9,6 @@ import java.util.*;
 import static org.hamcrest.Matchers.is;
 
 public class ControlQualityTest {
-
     GregorianCalendar currentDate;
     GregorianCalendar oneMonthAgo;
     GregorianCalendar fourMonthsAgo;
