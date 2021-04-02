@@ -1,6 +1,7 @@
 package ru.job4j.lsp;
 
 public class LSPWrongExample2 {
+
     class Rectangle {
         protected int width;
         protected int height;
@@ -23,6 +24,7 @@ public class LSPWrongExample2 {
     }
 
     class Square extends Rectangle {
+
         @Override
         public void setWidth(int width) {
             super.setWidth(width);
@@ -41,6 +43,7 @@ public class LSPWrongExample2 {
         rectangle.setHeight(height);
         return rectangle.getWidth() * rectangle.getHeight();
     }
+
     // В методе calculateRectangleArea() нарушается постусловие. При передаче в него экземпляра класса Rectangle
     // и вызове методов setWidth() и setHeight() будет выполняться условие:
     // (this.width == width) && (this.height == height).
