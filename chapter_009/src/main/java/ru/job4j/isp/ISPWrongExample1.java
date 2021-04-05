@@ -1,7 +1,6 @@
 package ru.job4j.isp;
 
 public class ISPWrongExample1 {
-
     interface IWorker {
         void work();
 
@@ -9,7 +8,6 @@ public class ISPWrongExample1 {
     }
 
     class HumanWorker implements IWorker {
-
         @Override
         public void work() {
             System.out.println("I work");
@@ -22,7 +20,6 @@ public class ISPWrongExample1 {
     }
 
     class RobotWorker implements IWorker {
-
         @Override
         public void work() {
             System.out.println("I work");

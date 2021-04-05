@@ -3,9 +3,7 @@ package ru.job4j.ocp;
 import java.util.List;
 
 public class OCPWrongExample3 {
-
     static class WrongClass {
-
         static class Shape {
         }
 
@@ -27,7 +25,6 @@ public class OCPWrongExample3 {
         }
 
         static class AreaCalculator {
-
             public double calculate(Shape shape) {
                 if (shape instanceof Circle) {
                     Circle circle = (Circle) shape;
@@ -91,7 +88,6 @@ public class OCPWrongExample3 {
         }
 
         static class AreaCalculator {
-
             public static void main(String[] args) {
                 List<Shape> list = List.of(new Circle(5), new Rectangle(6, 7), new Square(8));
                 list.forEach(shape -> System.out.println(shape.calculateArea()));

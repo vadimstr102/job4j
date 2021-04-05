@@ -12,7 +12,6 @@ public class SimpleMenu implements Menu<Item> {
     public void startMenu(List<Item> items) {
         Scanner scanner = new Scanner(System.in);
         String input;
-
         while (true) {
             System.out.println("Menu:");
             showMenu(items);

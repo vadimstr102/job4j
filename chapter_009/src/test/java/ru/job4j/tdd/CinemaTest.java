@@ -11,7 +11,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class CinemaTest {
-
     @Test
     @Ignore
     public void buy() {

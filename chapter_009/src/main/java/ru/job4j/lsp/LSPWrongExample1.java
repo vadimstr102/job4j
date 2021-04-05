@@ -1,9 +1,7 @@
 package ru.job4j.lsp;
 
 public class LSPWrongExample1 {
-
     class Shape {
-
         public void drawSquare(Square square) {
         }
 

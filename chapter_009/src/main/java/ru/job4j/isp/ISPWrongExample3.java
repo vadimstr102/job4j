@@ -1,7 +1,6 @@
 package ru.job4j.isp;
 
 public class ISPWrongExample3 {
-
     interface Duck {
         void sound();
 
@@ -11,7 +10,6 @@ public class ISPWrongExample3 {
     }
 
     class MallardDuck implements Duck {
-
         @Override
         public void sound() {
             System.out.println("Quack-Quack");
@@ -30,7 +28,6 @@ public class ISPWrongExample3 {
     }
 
     class RubberDuck implements Duck {
-
         @Override
         public void sound() {
             System.out.println("Squeak-Squeak");

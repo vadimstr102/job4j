@@ -6,7 +6,6 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 
 public class TruckTest {
-
     @Test
     public void whenGetSize() {
         Car truck = new Truck(5);

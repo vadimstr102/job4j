@@ -1,7 +1,6 @@
 package ru.job4j.lsp;
 
 public class LSPWrongExample3 {
-
     class Storage {
         protected String[] array;
 
@@ -20,7 +19,6 @@ public class LSPWrongExample3 {
     }
 
     class GoodsStorage extends Storage {
-
         public GoodsStorage(String[] array) {
             super(array);
         }

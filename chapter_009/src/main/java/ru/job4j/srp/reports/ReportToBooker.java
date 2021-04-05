@@ -3,7 +3,6 @@ package ru.job4j.srp.reports;
 import java.util.function.Predicate;
 
 public class ReportToBooker implements Report {
-
     private Store store;
 
     public ReportToBooker(Store store) {

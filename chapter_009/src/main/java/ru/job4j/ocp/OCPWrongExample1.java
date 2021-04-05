@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OCPWrongExample1 {
-
     class WrongClass {
         private ArrayList<String> list = new ArrayList<>();
 

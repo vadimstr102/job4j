@@ -1,7 +1,6 @@
 package ru.job4j.isp;
 
 public class ISPWrongExample2 {
-
     interface Phone {
         void call();
 
@@ -11,7 +10,6 @@ public class ISPWrongExample2 {
     }
 
     class SmartPhone implements Phone {
-
         @Override
         public void call() {
             System.out.println("Call");
@@ -29,7 +27,6 @@ public class ISPWrongExample2 {
     }
 
     class WiredPhone implements Phone {
-
         @Override
         public void call() {
             System.out.println("Call");

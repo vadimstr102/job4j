@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OCPWrongExample2 {
-
     class WrongClass {
-
         public ArrayList<String> load() {
             ArrayList<String> list = new ArrayList<>();
             //do something

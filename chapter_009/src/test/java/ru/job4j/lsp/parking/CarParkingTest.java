@@ -6,7 +6,6 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 
 public class CarParkingTest {
-
     @Test
     public void whenAutomobilePark() {
         CarParking carParking = new CarParking(3, 3);

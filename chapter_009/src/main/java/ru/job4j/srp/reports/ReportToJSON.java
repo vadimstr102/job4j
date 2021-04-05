@@ -3,7 +3,6 @@ package ru.job4j.srp.reports;
 import java.util.function.Predicate;
 
 public class ReportToJSON implements Report {
-
     private Store store;
 
     public ReportToJSON(Store store) {
@@ -17,17 +16,17 @@ public class ReportToJSON implements Report {
         for (Employee employee : store.findBy(filter)) {
             text
                     .append("{")
-                        .append("\"name\": \"")
-                        .append(employee.getName())
-                        .append("\",")
-                        .append("\"hired\": \"")
-                        .append(employee.getHired().getTime())
-                        .append("\",")
-                        .append("\"fired\": \"")
-                        .append(employee.getFired().getTime())
-                        .append("\",")
-                        .append("\"salary\": ")
-                        .append(employee.getSalary())
+                    .append("\"name\": \"")
+                    .append(employee.getName())
+                    .append("\",")
+                    .append("\"hired\": \"")
+                    .append(employee.getHired().getTime())
+                    .append("\",")
+                    .append("\"fired\": \"")
+                    .append(employee.getFired().getTime())
+                    .append("\",")
+                    .append("\"salary\": ")
+                    .append(employee.getSalary())
                     .append("}");
         }
         text.append("}");

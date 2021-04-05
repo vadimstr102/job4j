@@ -10,7 +10,6 @@ public class DIPWrongExample3 {
     class StoreService {
         public ArrayList<String> loadGoods(Store store) {
             ArrayList<String> arrayList = new ArrayList<>();
-
             //do something
             return arrayList;
         }

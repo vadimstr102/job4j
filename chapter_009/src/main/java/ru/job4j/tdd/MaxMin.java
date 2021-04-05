@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.BinaryOperator;
 
 public class MaxMin {
-
     public <T> T max(List<T> value, Comparator<T> comparator) {
         return searchInList(value, (t1, t2) -> comparator.compare(t1, t2) > 0 ? t1 : t2);
     }

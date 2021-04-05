@@ -8,7 +8,6 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class GeneratorTest {
-
     @Test
     @Ignore
     public void produceWhenNormal() {
