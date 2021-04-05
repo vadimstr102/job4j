@@ -21,12 +21,12 @@ public abstract class Food {
         return name;
     }
 
-    public Calendar getExpiryDate() {
-        return expiryDate;
-    }
-
     public Calendar getCreateDate() {
         return createDate;
+    }
+
+    public Calendar getExpiryDate() {
+        return expiryDate;
     }
 
     public double getPrice() {
